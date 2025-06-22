@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { FaMapMarkerAlt, FaSearch, FaShoppingCart, FaUser, FaHeart } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import {
+  FaMapMarkerAlt,
+  FaSearch,
+  FaShoppingCart,
+  FaUser,
+  FaHeart,
+} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase-config"; // Import Firebase auth if needed
+import { signOut } from "firebase/auth"; // Import signOut if you need to handle logout
 
-const Navbar = () => {
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
+const Navbar = ({ setIsAuth }) => {
   const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
       setCartCount(cart.length);
     };
 
@@ -16,21 +27,32 @@ const Navbar = () => {
     updateCartCount();
 
     // Listen to custom cart update event
-    window.addEventListener('cartUpdated', updateCartCount);
+    window.addEventListener("cartUpdated", updateCartCount);
 
     return () => {
-      window.removeEventListener('cartUpdated', updateCartCount);
+      window.removeEventListener("cartUpdated", updateCartCount);
     };
   }, []);
+
+  const signUserOut = async () => {
+    try {
+      await signOut(auth);
+      cookies.remove("auth-token");
+      setIsAuth(false);
+      navigate("/signin");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <nav className="bg-[#0053E2] shadow-md px-8 py-4 flex items-center justify-between">
       {/* Logo + Location */}
       <div className="flex items-center space-x-4">
-      <div onClick={() => navigate('/')} className='cursor-pointer' >
-         <img src="/Logo.png" alt="Logo" className="h-10 w-auto" />
-      </div>
-      
+        <div onClick={() => navigate("/")} className="cursor-pointer">
+          <img src="/Logo.png" alt="Logo" className="h-10 w-auto" />
+        </div>
+
         <div className="flex items-center text-gray-100 text-sm">
           <FaMapMarkerAlt className="mr-1 text-white" />
           <span>
@@ -65,15 +87,18 @@ const Navbar = () => {
         </div>
 
         {/* Sign In */}
-        <button className="flex items-center space-x-1 hover:text-blue-300">
+        <button
+          className="flex items-center space-x-1 hover:text-blue-300 cursor-pointer"
+          onClick={signUserOut}
+        >
           <FaUser className="text-lg text-white" />
-          <span className="text-white text-lg">Sign In</span>
+          <span className="text-white text-lg">Sign Out</span>
         </button>
 
         {/* Cart */}
         <button
           className="relative cursor-pointer flex items-center space-x-1 hover:text-blue-300"
-          onClick={() => navigate('/view-cart')}
+          onClick={() => navigate("/view-cart")}
         >
           <FaShoppingCart className="text-lg text-white" />
           <span className="text-lg text-white">Cart</span>
@@ -89,5 +114,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
