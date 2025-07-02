@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
 
 const ViewCart = () => {
   const [cart, setCart] = useState([]);
@@ -10,7 +9,7 @@ const ViewCart = () => {
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(stored);
-    setSelectedItems(stored.map((_, i) => true)); // default: all checked
+    setSelectedItems(stored.map(() => true));
   }, []);
 
   const handleRemove = (index) => {
@@ -32,11 +31,10 @@ const ViewCart = () => {
 
   const handleOrderAll = () => {
     const itemsToOrder = cart.filter((_, i) => selectedItems[i]);
-    if (itemsToOrder.length === 0) return alert("Please select at least one item to order.");
+    if (itemsToOrder.length === 0)
+      return alert("Please select at least one item to order.");
 
     navigate("/place-order", { state: { products: itemsToOrder } });
-
-    // For multiple orders, ideally navigate to a multi-order page and pass all itemsToOrder
   };
 
   const total = cart.reduce((acc, item, i) => {
@@ -49,59 +47,68 @@ const ViewCart = () => {
   return (
     <div className="min-h-screen p-6 bg-gray-100">
       <h2 className="text-3xl font-bold text-center mb-6">Your Cart</h2>
+
       {cart.length === 0 ? (
         <p className="text-center text-gray-600">Your cart is empty.</p>
       ) : (
-        <div className="max-w-5xl mx-auto space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {cart.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between bg-white p-4 rounded-lg shadow relative"
+              className="bg-white rounded-xl shadow p-4 flex flex-col items-start gap-3"
             >
-              {/* Remove Button */}
-              <button
-                onClick={() => handleRemove(index)}
-                className="absolute top-2 right-2 text-gray-500 hover:text-red-600"
-              >
-                <FaTimes />
-              </button>
+              {/* Image */}
+              <img
+                src={item.thumbnail || item.image}
+                alt={item.title}
+                className="w-full h-32 object-contain bg-gray-100 rounded"
+              />
 
-              {/* Item Info */}
-              <div className="flex items-center space-x-4">
+              {/* Title and Description */}
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="text-sm text-gray-600">{item.description || "No description available."}</p>
+
+              {/* Quantity and Price */}
+              <p className="text-sm text-gray-500">Quantity: {item.quantity || 1}</p>
+              <p className="text-green-700 font-bold text-lg">
+                ${(item.price * (item.quantity || 1)).toFixed(2)}
+              </p>
+
+              {/* Checkbox */}
+              <label className="flex items-center gap-2 mt-2 text-sm">
                 <input
                   type="checkbox"
                   checked={selectedItems[index] || false}
                   onChange={() => handleCheckboxChange(index)}
                   className="accent-blue-600"
                 />
-                <img
-                  src={item.thumbnail}
-                  alt={item.title}
-                  className="h-20 w-20 object-contain"
-                />
-                <div>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm text-gray-500">Qty: {item.quantity || 1}</p>
-                </div>
-              </div>
-              <div className="font-bold text-green-600">
-                ${(item.price * (item.quantity || 1)).toFixed(2)}
-              </div>
+                Select for Order
+              </label>
+
+              {/* Remove Button */}
+              <button
+                onClick={() => handleRemove(index)}
+                className="mt-auto cursor-pointer bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded text-sm"
+              >
+                Remove
+              </button>
             </div>
           ))}
+        </div>
+      )}
 
-          <div className="text-right font-bold text-xl text-gray-800">
+      {/* Total and Order Button */}
+      {cart.length > 0 && (
+        <div className="mt-8 max-w-6xl mx-auto flex justify-end items-center gap-6">
+          <div className="text-xl font-bold text-gray-800">
             Total: ${total.toFixed(2)}
           </div>
-
-          <div className="text-right">
-            <button
-              onClick={handleOrderAll}
-              className="mt-4 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg text-lg font-semibold shadow"
-            >
-              Order Now
-            </button>
-          </div>
+          <button
+            onClick={handleOrderAll}
+            className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white py-2 px-6 rounded-lg text-lg font-semibold shadow"
+          >
+            Order Now
+          </button>
         </div>
       )}
     </div>

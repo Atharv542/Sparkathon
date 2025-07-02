@@ -4,64 +4,64 @@ import toast from "react-hot-toast";
 const toyItems = [
   {
     id: 1,
-    title: "Airplane Studio Kit",
-    description: "Design and build airplanes with this creative Guillow studio kit and travel case.",
-    image: "https://m.media-amazon.com/images/I/81AOuZugIyL.jpg",
-    price: 34.99,
+    title: "Airplane Design Studio Kit",
+    description: "Build and customize model airplanes with this creative design studio and travel case.",
+    image: "https://i5.walmartimages.com/asr/7daab614-4eb9-474a-a70e-2b6215c43c0c_1.9b458b0e2c80611e691cc23cce5e01fc.jpeg",
+    price: 33.92,
   },
   {
     id: 2,
-    title: "Woodstock Collage Puzzle - 500 pcs",
-    description: "Colorful 500-piece puzzle featuring a Woodstock-themed collage, perfect for kids and adults.",
-    image: "https://www.bobangles.com.au/wp-content/uploads/2024/06/W-10353BX-1.jpg",
-    price: 17.49,
+    title: "Owl Growth Chart - Pink",
+    description: "Track your child’s height with this adorable owl-themed birchwood growth chart.",
+    image: "https://i.pinimg.com/736x/ab/99/f4/ab99f42569c631c7381c7e80cbe9e274.jpg",
+    price: 18.70,
   },
   {
     id: 3,
-    title: "Triangular Double-Tip Crayons",
-    description: "Durable, easy-grip crayons with dual tips, great for kids' art and coloring fun.",
-    image: "https://th.bing.com/th/id/R.e540768ae123aaf6bd6121d13c2fc44e?rik=Ko8eW%2bUxtVlXzg&riu=http%3a%2f%2froundeyesupply.com%2fcdn%2fshop%2ffiles%2f121017096.jpg%3fv%3d1684258029&ehk=qUA5fmvXQAW%2flCtGtleA6UiJD7RmfdDGZmbUoq4mNu0%3d&risl=&pid=ImgRaw&r=0",
-    price: 97.68,
+    title: "Cactus Silicone Teether Set",
+    description: "Soft, baby-safe silicone teethers in a cute cactus design. Comes in a set of two.",
+    image: "https://i5.walmartimages.com/seo/Sugarbooger-Silicone-Teether-Set-of-Two-Happy-Cactus_894ce01d-69e4-427d-8675-2fe922d45727_1.0151c1f1fa82ea38271c55822c7e2b25.jpeg",
+    price: 16.72,
   },
   {
     id: 4,
-    title: "Moonlite Story Projector Set",
-    description: "Includes 3 magical story reels to be used with the Moonlite storybook projector for boys.",
-    image: "https://mymoonlite.com/cdn/shop/files/3-STORY__0002_PRINCESS-12x10x2_72ppi_600x600.png?v=1728508538",
-    price: 18.16,
+    title: "My Little Pony Wall Decals",
+    description: "Decorate your room with giant, removable My Little Pony Fluttershy decals.",
+    image: "https://images.homedepot-static.com/productImages/f53714ee-6137-4ca3-b5b8-223a3eb2eafb/svn/multi-roommates-wall-decals-rmk2708gm-64_1000.jpg",
+    price: 12.97,
   },
   {
     id: 5,
-    title: "Black Canary Statue - DC Cover Girls",
-    description: "Stylish collectible statue of Black Canary designed by Joëlle Jones, a must-have for DC fans.",
-    image: "https://i.ebayimg.com/images/g/Vs0AAOSwfWFkk0-U/s-l1600.jpg",
-    price: 84.61,
+    title: "Zebra Plush Rocker",
+    description: "A soft zebra plush rocker that brings both comfort and fun to your child’s playtime.",
+    image: "https://th.bing.com/th/id/OIP.wdRNGnvgW_gn4dBHXHqFdgHaJ4?rs=1&pid=ImgDetMain",
+    price: 47.91,
   },
   {
     id: 6,
-    title: "Flash Logo Sticker - DC Comics",
-    description: "Classic Flash superhero logo sticker to personalize notebooks, laptops, and more.",
-    image: "https://i.pinimg.com/600x315/83/fc/b1/83fcb1cddaab7932f4a28995f1de1fa7.jpg",
-    price: 4.99,
+    title: "SpongeBob Toddler Bed",
+    description: "Bright and playful toddler bed with Nickelodeon’s SpongeBob design for young fans.",
+    image: "https://th.bing.com/th/id/OIP.ieceFfCUmx_Bx9Te-lMr0gHaFS?rs=1&pid=ImgDetMain",
+    price: 58.49,
   },
   {
     id: 7,
-    title: "ABC Melody Maker - Learning Toy",
-    description: "Interactive toy that teaches ABCs through music and melodies for early learners.",
-    image: "https://images-bucket.bonanzastatic.com/afu/images/f4f3/8575/3c9e_11887885234/__57.jpg",
-    price: 34.39,
+    title: "Ergobaby Stroller Carry Bag",
+    description: "Durable backpack-style carry bag designed for Ergobaby Metro strollers.",
+    image: "https://cdn.shopify.com/s/files/1/0690/1977/products/Ergobaby-Metro-1.5-Compact-City-Stroller---Marine-Blue_1800x1800.jpg?v=1586789777",
+    price: 30.00,
   },
   {
     id: 8,
-    title: "Common Core Kit - Grade 5",
-    description: "Comprehensive educational kit aligned with Common Core standards for 5th grade.",
-    image: "https://m.media-amazon.com/images/I/814BzByZlQL._AC_.jpg",
-    price: 12.88,
+    title: "Grade 5 Core Standards Kit",
+    description: "Complete Common Core learning kit for 5th grade with worksheets and activities.",
+    image: "https://i.pinimg.com/originals/60/f2/66/60f266c1a210e05aca65f89b3433d6b2.jpg",
+    price: 27.57,
   },
 ];
 
 
-const CategoryPage = () => {
+const Baby = () => {
   const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const CategoryPage = () => {
 
   return (
     <div className="p-6 min-h-screen bg-gray-300">
-      <h2 className="text-3xl font-bold capitalize mb-6 text-center">Toys and Games</h2>
+      <h2 className="text-3xl font-bold capitalize mb-6 text-center">Baby Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {toyItems.map((item) => (
           <div
@@ -146,4 +146,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default Baby;

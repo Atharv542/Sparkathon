@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const promos = [
   {
-    title: "Upgrade your home with stylish furniture",
-    link: `/category/furniture`,
-    image:"https://th.bing.com/th/id/OIP.TxVIFj6vFIJy2tGB7kFVhAHaE8?rs=1&pid=ImgDetMain",
+    title: "Fun-Packed Toys & Brain-Boosting Games for All Ages",
+    link: `/category`,
+    image:"https://th.bing.com/th/id/OIP.qtMnjBXSh_Yj0ephVg68fAHaEp?rs=1&pid=ImgDetMain",
     bg: "bg-blue-100",
   },
   
@@ -13,37 +14,38 @@ const promos = [
     // Animated center promo (kept empty)
   },
   {
-    title: "Fresh groceries delivered to your doorstep",
-    link: `/category/groceries`,
-    image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=800&q=80",
+    title: "Modern Home & Kitchen Essentials for Smart Living",
+    link: `/kitchen`,
+    image: "https://wallpapers.com/images/file/kitchen-design-pictures-ka628co3irps7c1g.jpg",
     bg: "bg-gray-100",
   },
   
   {
-    title: "Latest electronic items at unbeatable prices",
-    link: `/category/electronics`,
-    image: "https://th.bing.com/th/id/OIP.mw6baeuYQrCJ2ASYsLY2NwHaDF?rs=1&pid=ImgDetMain",
+    title: "Top Baby Gear & Gadgets for Tech-Savvy Parents",
+    link: `/baby`,
+    image: "https://png.pngtree.com/background/20210715/original/pngtree-pink-cute-baby-supplies-background-picture-image_1253985.jpg",
     bg: "bg-rose-100",
   },
   {
-    title: "Stylish footwears and watches for modern men",
-    link: `/category/men`,
-    image: "https://i.pinimg.com/originals/f6/70/e0/f670e036d26c7a32d33c76ce8a7895c7.jpg",
-    bg: "bg-green-100",
-  },
-  {
-    title: "Trendy styles collection for modern women",
-    link: `/category/women`,
-    image: "https://marketplace.canva.com/EAFVHstxnwk/1/0/800w/canva-beige-aesthetic-exclusive-fashion-wear-collection-clothing-banner-yv-HRWs1aMc.jpg",
+    title: "Stylish Men’s Clothing & Iconic Jewelry Collections",
+    link: `/clothing`,
+    image: "https://th.bing.com/th/id/OIP.b-6oTlLQLt0Np3lSsOd1yQHaE8?rs=1&pid=ImgDetMain",
     bg: "bg-amber-100",
   },
   {
-    title: "Fragrances that leave a lasting impression",
-    link: `/category/fragrances`,
-    image: "https://png.pngtree.com/png-clipart/20220429/original/pngtree-realistic-perfume-banner-bottle-glass-png-image_7565082.png",
+    title: "Gear Up for Action: Sports & Outdoor Essentials You’ll Love",
+    link: `/sports`,
+    image: "https://th.bing.com/th/id/OIP.rHVEiM405vKnn9NW2C_o_gHaFq?rs=1&pid=ImgDetMain",
+    bg: "bg-green-100",
+  },
+  {
+    title: "Creative Art Supplies & DIY Craft Kits for Every Artist",
+    link: `/art`,
+    image: "https://www.financialexpress.com/wp-content/uploads/2024/03/Art-and-Craft-1.jpg",
     bg: "bg-pink-100",
   },
 ];
+
 
 const sliderImages = [
   "https://cdn.shopify.com/s/files/1/0153/8863/files/Headphone-Zone-Experience-Studio-Homepage-Final_1300x.progressive.jpg?v=1626436828", // Headphones
@@ -105,12 +107,12 @@ const HomePromos = () => {
               className="w-full rounded-xl h-60 object-cover mb-4"
             />
             <h3 className="text-lg px-4 font-semibold">{promo.title}</h3>
-            <a
-              href={promo.link}
+            <Link
+              to={promo.link}
               className="text-blue-600 underline px-4 text-sm mb-2 inline-block"
             >
               Shop now
-            </a>
+            </Link>
           </div>
         );
       })}
@@ -119,4 +121,3 @@ const HomePromos = () => {
 };
 
 export default HomePromos;
-

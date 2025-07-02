@@ -4,64 +4,64 @@ import toast from "react-hot-toast";
 const toyItems = [
   {
     id: 1,
-    title: "Airplane Studio Kit",
-    description: "Design and build airplanes with this creative Guillow studio kit and travel case.",
-    image: "https://m.media-amazon.com/images/I/81AOuZugIyL.jpg",
-    price: 34.99,
+    title: "Pikachu Deluxe Costume (XS)",
+    description: "Official Pokémon Pikachu costume for kids – X-Small size with deluxe detailing.",
+    image: "https://th.bing.com/th/id/OIP.kEjrzJZitPNS86dZCqKXLwAAAA?rs=1&pid=ImgDetMain",
+    price: 29.12,
   },
   {
     id: 2,
-    title: "Woodstock Collage Puzzle - 500 pcs",
-    description: "Colorful 500-piece puzzle featuring a Woodstock-themed collage, perfect for kids and adults.",
-    image: "https://www.bobangles.com.au/wp-content/uploads/2024/06/W-10353BX-1.jpg",
-    price: 17.49,
+    title: "Union Officer Costume (M)",
+    description: "Civil War-era Union Officer costume for children. Medium size by Forum Novelties.",
+    image: "https://th.bing.com/th/id/OIP.5Fo95gpL43S-qlHBPcn0xwHaHa?w=500&h=500&rs=1&pid=ImgDetMain",
+    price: 21.09,
   },
   {
     id: 3,
-    title: "Triangular Double-Tip Crayons",
-    description: "Durable, easy-grip crayons with dual tips, great for kids' art and coloring fun.",
-    image: "https://th.bing.com/th/id/R.e540768ae123aaf6bd6121d13c2fc44e?rik=Ko8eW%2bUxtVlXzg&riu=http%3a%2f%2froundeyesupply.com%2fcdn%2fshop%2ffiles%2f121017096.jpg%3fv%3d1684258029&ehk=qUA5fmvXQAW%2flCtGtleA6UiJD7RmfdDGZmbUoq4mNu0%3d&risl=&pid=ImgRaw&r=0",
-    price: 97.68,
+    title: "Captain America T-Shirt & Mask",
+    description: "Marvel Avengers Assemble t-shirt costume with Captain America mask. Small size.",
+    image: "https://th.bing.com/th/id/OIP.3H7Jxl03pLcHtqWiopzXAgHaHa?o=7rm=3&rs=1&pid=ImgDetMain",
+    price: 10.36,
   },
   {
     id: 4,
-    title: "Moonlite Story Projector Set",
-    description: "Includes 3 magical story reels to be used with the Moonlite storybook projector for boys.",
-    image: "https://mymoonlite.com/cdn/shop/files/3-STORY__0002_PRINCESS-12x10x2_72ppi_600x600.png?v=1728508538",
-    price: 18.16,
+    title: "Attack On Titan Levi Wallet",
+    description: "Compact Levi-themed wallet from Attack on Titan – perfect for anime fans.",
+    image: "https://m.media-amazon.com/images/I/61eBwttNcLL.__AC_SX300_SY300_QL70_ML2_.jpg",
+    price: 24.53,
   },
   {
     id: 5,
-    title: "Black Canary Statue - DC Cover Girls",
-    description: "Stylish collectible statue of Black Canary designed by Joëlle Jones, a must-have for DC fans.",
-    image: "https://i.ebayimg.com/images/g/Vs0AAOSwfWFkk0-U/s-l1600.jpg",
-    price: 84.61,
+    title: "2-Tone Costume Wig",
+    description: "Colorful 2-tone wig ideal for cosplay, costumes, and themed parties.",
+    image: "https://i.etsystatic.com/18769024/r/il/4f2b7f/5216925853/il_600x600.5216925853_w2ol.jpg",
+    price: 14.73,
   },
   {
     id: 6,
     title: "Flash Logo Sticker - DC Comics",
-    description: "Classic Flash superhero logo sticker to personalize notebooks, laptops, and more.",
-    image: "https://i.pinimg.com/600x315/83/fc/b1/83fcb1cddaab7932f4a28995f1de1fa7.jpg",
-    price: 4.99,
+    description: "Official DC Comics Flash logo vinyl sticker for customizing laptops, notebooks, etc.",
+    image: "https://m.media-amazon.com/images/I/61jXjYEgx4L._AC_SX569_.jpg",
+    price: 34.99,
   },
   {
     id: 7,
-    title: "ABC Melody Maker - Learning Toy",
-    description: "Interactive toy that teaches ABCs through music and melodies for early learners.",
-    image: "https://images-bucket.bonanzastatic.com/afu/images/f4f3/8575/3c9e_11887885234/__57.jpg",
-    price: 34.39,
+    title: "Medieval Princess Costume",
+    description: "Elegant fuchsia-colored medieval princess dress costume for girls.",
+    image: "https://i5.walmartimages.com/asr/9811a328-0a11-4ac2-8c17-32aee6bd177c.303a8ef2d7b0957aad4d9b12fad06122.jpeg?odnHeight=372&odnWidth=372&odnBg=FFFFFF",
+    price: 22.58, // Minimum selected from the range
   },
   {
     id: 8,
-    title: "Common Core Kit - Grade 5",
-    description: "Comprehensive educational kit aligned with Common Core standards for 5th grade.",
-    image: "https://m.media-amazon.com/images/I/814BzByZlQL._AC_.jpg",
-    price: 12.88,
+    title: "Suede Cowboy Hat - Adult",
+    description: "Classic brown suede cowboy hat for adult costume wear by Forum Novelties.",
+    image: "https://i.ebayimg.com/images/g/0bsAAOSwzlFmIUjZ/s-l1600.jpg",
+    price: 14.99,
   },
 ];
 
 
-const CategoryPage = () => {
+const Clothing = () => {
   const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const CategoryPage = () => {
 
   return (
     <div className="p-6 min-h-screen bg-gray-300">
-      <h2 className="text-3xl font-bold capitalize mb-6 text-center">Toys and Games</h2>
+      <h2 className="text-3xl font-bold capitalize mb-6 text-center">Stylish Clothing</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {toyItems.map((item) => (
           <div
@@ -133,7 +133,7 @@ const CategoryPage = () => {
               </div>
             </div>
 
-               <button
+              <button
               onClick={() => handleAddToCart(item)}
               className="mt-4 w-full bg-blue-600 cursor-pointer hover:bg-blue-700 text-white py-2 rounded-md text-sm"
             >
@@ -146,4 +146,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default Clothing;

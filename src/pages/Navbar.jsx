@@ -7,31 +7,32 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase-config"; // Import Firebase auth if needed
-import { signOut } from "firebase/auth"; // Import signOut if you need to handle logout
-
+import { auth } from "../firebase-config";
+import { signOut } from "firebase/auth";
 import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
 
 const Navbar = ({ setIsAuth }) => {
   const [cartCount, setCartCount] = useState(0);
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Get logged-in user name
+    const user = auth.currentUser;
+    if (user) {
+      setUserName(user.displayName || user.email.split("@")[0]);
+    }
+
     const updateCartCount = () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       setCartCount(cart.length);
     };
 
-    // Initial count on load
     updateCartCount();
-
-    // Listen to custom cart update event
     window.addEventListener("cartUpdated", updateCartCount);
-
-    return () => {
-      window.removeEventListener("cartUpdated", updateCartCount);
-    };
+    return () => window.removeEventListener("cartUpdated", updateCartCount);
   }, []);
 
   const signUserOut = async () => {
@@ -46,68 +47,72 @@ const Navbar = ({ setIsAuth }) => {
   };
 
   return (
-    <nav className="bg-[#0053E2] shadow-md px-8 py-4 flex items-center justify-between">
-      {/* Logo + Location */}
-      <div className="flex items-center space-x-4">
-        <div onClick={() => navigate("/")} className="cursor-pointer">
-          <img src="/Logo.png" alt="Logo" className="h-10 w-auto" />
-        </div>
-
-        <div className="flex items-center text-gray-100 text-sm">
-          <FaMapMarkerAlt className="mr-1 text-white" />
-          <span>
-            Deliver to <strong className="ml-1">Your Location</strong>
-          </span>
+    <nav className="bg-[#0053E2] px-6 py-4 shadow-md flex flex-wrap items-center justify-between">
+      {/* Left: Logo + Location */}
+      <div className="flex items-center gap-4">
+        <img
+          src="/Logo.png"
+          alt="Logo"
+          className="h-10 w-auto cursor-pointer"
+          onClick={() => navigate("/")}
+        />
+        <div className="flex items-center text-sm text-white">
+          <FaMapMarkerAlt className="mr-1" />
+          <span>Deliver to <strong>Your Location</strong></span>
         </div>
       </div>
 
-      {/* Search */}
-      <div className="flex-1 mx-6">
-        <div className="flex w-full h-14 border border-gray-300 bg-white rounded-full overflow-hidden">
+      {/* Center: Search Bar */}
+      <div className="flex-1 max-w-xl mx-4">
+        <div className="flex h-12 bg-white rounded-full overflow-hidden shadow-sm border border-gray-300">
           <input
             type="text"
             placeholder="Search everything at Walmart online and in store"
-            className="px-4 py-2 w-full focus:outline-none"
+            className="px-4 py-2 w-full text-sm focus:outline-none"
           />
-          <button className="bg-blue-600 px-4 text-white">
+          <button className="bg-blue-600 px-4 text-white flex items-center justify-center">
             <FaSearch />
           </button>
         </div>
       </div>
 
-      {/* Right Section */}
-      <div className="flex items-center space-x-6 text-sm">
+      {/* Right: Actions */}
+      <div className="flex items-center gap-6 text-white text-sm">
         {/* Reorder */}
-        <div className="flex flex-col items-center hover:text-blue-300 cursor-pointer">
-          <div className="flex items-center space-x-1">
-            <FaHeart className="text-lg text-white" />
-            <span className="text-white text-lg font-medium">Reorder</span>
+        <div className="hidden sm:flex flex-col items-center hover:text-blue-300 cursor-pointer">
+          <div className="flex items-center gap-1">
+            <FaHeart className="text-lg" />
+            <span className="text-lg font-medium">Reorder</span>
           </div>
-          <span className="text-white text-xs">My Items</span>
+          <span className="text-xs">My Items</span>
         </div>
 
-        {/* Sign In */}
+        {/* User Name */}
+        <div className="flex flex-col items-center">
+          <FaUser className="text-xl mb-0.5" />
+          <span className="text-xs">{userName || "Guest"}</span>
+        </div>
+
+        {/* Sign Out */}
         <button
-          className="flex items-center space-x-1 hover:text-blue-300 cursor-pointer"
           onClick={signUserOut}
+          className="bg-blue-800 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm"
         >
-          <FaUser className="text-lg text-white" />
-          <span className="text-white text-lg">Sign Out</span>
+          Sign Out
         </button>
 
         {/* Cart */}
-        <button
-          className="relative cursor-pointer flex items-center space-x-1 hover:text-blue-300"
+        <div
           onClick={() => navigate("/view-cart")}
+          className="relative cursor-pointer flex items-center hover:text-blue-300"
         >
-          <FaShoppingCart className="text-lg text-white" />
-          <span className="text-lg text-white">Cart</span>
+          <FaShoppingCart className="text-xl" />
           {cartCount > 0 && (
-            <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
               {cartCount}
             </span>
           )}
-        </button>
+        </div>
       </div>
     </nav>
   );

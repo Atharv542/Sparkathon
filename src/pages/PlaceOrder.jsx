@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase-config"; // adjust path as needed
+
 
 const PlaceOrder = () => {
   const { state } = useLocation();
@@ -14,17 +17,38 @@ const PlaceOrder = () => {
     0
   );
 
-  const handleConfirmOrder = () => {
-    const summary = items.map(item =>
-      `${item.title} (Qty: ${item.quantity || 1}) - $${(item.price * (item.quantity || 1)).toFixed(2)}`
-    ).join("\n");
+  const handleConfirmOrder = async() => {
+    // const summary = items.map(item =>
+    //   `${item.title} (Qty: ${item.quantity || 1}) - $${(item.price * (item.quantity || 1)).toFixed(2)}`
+    // ).join("\n");
+    if(!paymentMethod || !address) return;
 
-    toast.success(`Congratulations! Your order is confirmed!`);
+    try{
+      const orderDetails = {
+        customer : "Dhruvi",address,paymentMethod,
+        status : "Pending",
+        type : "Online",
+        date : new Date().toISOString(), total,
+        products : items.map((item)=> ({
+          title : item.title,
+          price : item.price,
+          quantity : item.quantity || 1,
+          dimensions : item.dimensions || "N/A",
+        })),
+      };
+      await addDoc(collection(db,"orders"),orderDetails);
+       toast.success(`Congratulations! Your order is confirmed!`);
+    }catch(err){
+      console.error("Firebase error:" ,err);
+      toast.error("Failed to send the order. Try again.");
+    }
   };
 
   if (!items.length) {
     return <div className="min-h-screen flex items-center justify-center text-gray-600 text-xl">No items selected for order.</div>;
   }
+
+  
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -35,7 +59,7 @@ const PlaceOrder = () => {
           {items.map((item, index) => (
             <div key={index} className="flex items-center justify-between bg-gray-50 p-4 rounded-md shadow-sm">
               <div className="flex items-center space-x-4">
-                <img src={item.thumbnail} alt={item.title} className="h-16 w-16 object-contain" />
+                <img src={item.thumbnail|| item.image} alt={item.title} className="h-16 w-16 object-contain" />
                 <div>
                   <h3 className="font-semibold">{item.title}</h3>
                   <p className="text-sm text-gray-600">Qty: {item.quantity || 1}</p>
@@ -97,9 +121,3 @@ const PlaceOrder = () => {
 };
 
 export default PlaceOrder;
-
-
-
-
-
-

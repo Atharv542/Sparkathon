@@ -1,67 +1,66 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
 const toyItems = [
   {
     id: 1,
-    title: "Airplane Studio Kit",
-    description: "Design and build airplanes with this creative Guillow studio kit and travel case.",
-    image: "https://m.media-amazon.com/images/I/81AOuZugIyL.jpg",
-    price: 34.99,
+    title: "Etched Glass Window Film (24x36)",
+    description: "Decorative window film that simulates the look of etched glass.",
+    image: "https://images.thdstatic.com/productImages/a6c60250-e9da-4d73-a603-21cb6e856388/svn/etched-artscape-window-film-01-0121-64_1000.jpg",
+    price: 12.99,
   },
   {
     id: 2,
-    title: "Woodstock Collage Puzzle - 500 pcs",
-    description: "Colorful 500-piece puzzle featuring a Woodstock-themed collage, perfect for kids and adults.",
-    image: "https://www.bobangles.com.au/wp-content/uploads/2024/06/W-10353BX-1.jpg",
-    price: 17.49,
+    title: "Red Activity Table – Adjustable Height",
+    description: "Durable red laminate activity table with adjustable short legs for kids.",
+    image: "https://m.media-amazon.com/images/I/71tfSgX1SWL._AC_SL1500_.jpg",
+    price: 117.26,
   },
   {
     id: 3,
-    title: "Triangular Double-Tip Crayons",
-    description: "Durable, easy-grip crayons with dual tips, great for kids' art and coloring fun.",
-    image: "https://th.bing.com/th/id/R.e540768ae123aaf6bd6121d13c2fc44e?rik=Ko8eW%2bUxtVlXzg&riu=http%3a%2f%2froundeyesupply.com%2fcdn%2fshop%2ffiles%2f121017096.jpg%3fv%3d1684258029&ehk=qUA5fmvXQAW%2flCtGtleA6UiJD7RmfdDGZmbUoq4mNu0%3d&risl=&pid=ImgRaw&r=0",
-    price: 97.68,
+    title: "Stainless Steel Hose Clamps – 10 Pack",
+    description: "Heavy-duty hose clamps made of stainless steel for plumbing and automotive use.",
+    image: "https://m.media-amazon.com/images/I/71VLfjENISL._SL1500_.jpg",
+    price: 34.27,
   },
   {
     id: 4,
-    title: "Moonlite Story Projector Set",
-    description: "Includes 3 magical story reels to be used with the Moonlite storybook projector for boys.",
-    image: "https://mymoonlite.com/cdn/shop/files/3-STORY__0002_PRINCESS-12x10x2_72ppi_600x600.png?v=1728508538",
-    price: 18.16,
+    title: "Frozen 2 Twin/Full Comforter Set",
+    description: "Disney Frozen 2 themed comforter and sham set featuring forest spirit designs.",
+    image: "https://images-na.ssl-images-amazon.com/images/I/51ZMC0Ras6L.jpg",
+    price: 36.37,
   },
   {
     id: 5,
-    title: "Black Canary Statue - DC Cover Girls",
-    description: "Stylish collectible statue of Black Canary designed by Joëlle Jones, a must-have for DC fans.",
-    image: "https://i.ebayimg.com/images/g/Vs0AAOSwfWFkk0-U/s-l1600.jpg",
-    price: 84.61,
+    title: "Alice in Wonderland Tapestry Blanket",
+    description: "Cozy woven tapestry throw blanket with Mad Hatter’s Wonderland theme.",
+    image: "https://allears.net/wp-content/uploads/2022/11/https-m-media-amazon-com-images-i-a1i2vw8sepl-_ac_sl1500_-jpg.jpg",
+    price: 35.00,
   },
   {
     id: 6,
-    title: "Flash Logo Sticker - DC Comics",
-    description: "Classic Flash superhero logo sticker to personalize notebooks, laptops, and more.",
-    image: "https://i.pinimg.com/600x315/83/fc/b1/83fcb1cddaab7932f4a28995f1de1fa7.jpg",
-    price: 4.99,
+    title: "Curious George Giant Wall Decal",
+    description: "Peel and stick wall decal featuring Curious George. Easy to apply and remove.",
+    image: "https://m.media-amazon.com/images/S/aplus-media/vc/f33d1d3d-a338-48c8-973c-e12bede91196.__CR0,0,970,300_PT0_SX970_V1___.jpg",
+    price: 11.00,
   },
   {
     id: 7,
-    title: "ABC Melody Maker - Learning Toy",
-    description: "Interactive toy that teaches ABCs through music and melodies for early learners.",
-    image: "https://images-bucket.bonanzastatic.com/afu/images/f4f3/8575/3c9e_11887885234/__57.jpg",
-    price: 34.39,
+    title: "JoJo Siwa Sweet Life Curtains",
+    description: "Colorful and stylish window curtains featuring JoJo Siwa graphics.",
+    image: "https://m.media-amazon.com/images/I/91rmwbh2moS._AC_.jpg",
+    price: 19.99,
   },
   {
     id: 8,
-    title: "Common Core Kit - Grade 5",
-    description: "Comprehensive educational kit aligned with Common Core standards for 5th grade.",
-    image: "https://m.media-amazon.com/images/I/814BzByZlQL._AC_.jpg",
-    price: 12.88,
+    title: "Kids Bistro Chair Set – White/Driftwood",
+    description: "Stylish 2-piece chair set for children with a modern bistro look.",
+    image: "https://th.bing.com/th/id/R.7a6538213183cf3e6a477247ec1ecb8b?rik=frC9I3LMRVxb5Q&riu=http%3a%2f%2fwww.deltachildren.com%2fcdn%2fshop%2fproducts%2fuiw54fqzsq5bbacpwv0i.jpg%3fv%3d1634930347&ehk=FZB%2fuPAM3yqJoZL1QOC2yYCdOYJw2rKXL08MtjhC8z4%3d&risl=&pid=ImgRaw&r=0",
+    price: 99.99,
   },
 ];
 
 
-const CategoryPage = () => {
+const Kitchen = () => {
   const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
@@ -98,7 +97,7 @@ const CategoryPage = () => {
 
   return (
     <div className="p-6 min-h-screen bg-gray-300">
-      <h2 className="text-3xl font-bold capitalize mb-6 text-center">Toys and Games</h2>
+      <h2 className="text-3xl font-bold capitalize mb-6 text-center">Kitchen Appliances</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {toyItems.map((item) => (
           <div
@@ -146,4 +145,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default Kitchen;
